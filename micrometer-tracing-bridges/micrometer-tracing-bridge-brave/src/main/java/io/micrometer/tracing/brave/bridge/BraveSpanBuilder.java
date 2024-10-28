@@ -33,7 +33,7 @@ import java.util.concurrent.TimeUnit;
  * @author Marcin Grzejszczak
  * @since 1.0.0
  */
-class BraveSpanBuilder implements Span.Builder {
+public class BraveSpanBuilder implements Span.Builder {
 
     private final Tracer tracer;
 
@@ -89,6 +89,14 @@ class BraveSpanBuilder implements Span.Builder {
         span.remoteIpAndPort(this.ip, this.port);
         this.delegate = span;
         return span;
+    }
+
+    public TraceContextOrSamplingFlags getParentContext() {
+        return this.parentContext;
+    }
+
+    public Span.Builder setParentContext(TraceContextOrSamplingFlags context) {
+        this.parentContext = context;
     }
 
     @Override
